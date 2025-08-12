@@ -1,81 +1,129 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const socialLinks = [
-    { icon: 'facebook-f', url: '#' },
-    { icon: 'twitter', url: '#' },
-    { icon: 'linkedin-in', url: '#' },
-    { icon: 'instagram', url: '#' },
-    { icon: 'github', url: '#' },
+    { icon: 'twitter', url: '#', name: 'Twitter' },
+    { icon: 'linkedin-in', url: '#', name: 'LinkedIn' },
+    { icon: 'github', url: '#', name: 'GitHub' },
+    { icon: 'dribbble', url: '#', name: 'Dribbble' },
   ];
 
   const quickLinks = [
     { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
+    { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
     { name: "Projects", path: "/projects" },
-    { name: "Contact", path: "/contact" },
   ];
 
   const contactInfo = [
     { icon: 'map-marker-alt', text: '123 Tech Street, Silicon Valley, CA 94000' },
     { icon: 'phone-alt', text: '+1 (555) 123-4567' },
-    { icon: 'envelope', text: 'info@cartlydev.com' },
+    { icon: 'envelope', text: 'hello@cartlydev.com' },
   ];
 
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
   return (
-    <footer className="bg-gradient-to-br from-[#0a101f] via-[#0f172a] to-[#0a101f] text-[#B2FFFF] pt-20 pb-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-gradient-to-b from-primary via-secondary to-primary pt-20 pb-12 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-accent/10"
+            style={{
+              width: `${Math.random() * 300 + 100}px`,
+              height: `${Math.random() * 300 + 100}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              filter: 'blur(40px)'
+            }}
+            animate={{
+              opacity: [0.1, 0.2, 0.1],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              repeatType: 'reverse',
+              ease: 'easeInOut'
+            }}
+          />
+        ))}
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-4 gap-12"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           {/* Brand Info */}
-          <motion.div 
-            className="md:col-span-2"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Link to="/" className="text-3xl font-extrabold tracking-wide flex items-center mb-6">
-              <span className="text-[#00f2ff]">Cartly</span>
-              <span className="text-white ml-1">Dev</span>
+          <motion.div variants={fadeInUp} className="md:col-span-2">
+            <Link to="/" className="text-3xl font-bold flex items-center mb-6 font-poppins">
+              <span className="gradient-text">Cartly</span>
+              <span className="text-white">Dev</span>
             </Link>
-            <p className="text-gray-300 leading-relaxed mb-6">
-              We craft cutting-edge digital experiences, transforming ideas into impactful technology solutions for modern businesses.
+            <p className="text-gray-400 leading-relaxed mb-6">
+              Crafting premium digital experiences that drive results. We transform ideas into impactful technology solutions.
             </p>
-            <div className="flex space-x-5">
-              {socialLinks.map((social, index) => (
+            <div className="flex space-x-4">
+              {socialLinks.map((social) => (
                 <motion.a
-                  key={index}
+                  key={social.icon}
                   href={social.url}
-                  className="text-gray-400 hover:text-[#00f2ff] transition duration-300 text-xl"
-                  whileHover={{ y: -3 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-light w-10 h-10 flex items-center justify-center rounded-full text-gray-300 hover:text-accent transition-colors"
+                  whileHover={{ 
+                    y: -3,
+                    scale: 1.1,
+                    backgroundColor: 'rgba(0, 207, 255, 0.1)'
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={social.name}
                 >
-                  <i className={`fab fa-${social.icon}`}></i>
+                  <i className={`fab fa-${social.icon} text-lg`} />
                 </motion.a>
               ))}
             </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-xl font-semibold text-white mb-6 pb-2 border-b border-[#00f2ff] inline-block">
+          <motion.div variants={fadeInUp}>
+            <h3 className="text-lg font-semibold text-white mb-6 pb-2 border-b border-accent/30">
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <motion.li 
-                  key={index}
-                  whileHover={{ x: 5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  <Link to={link.path} className="hover:text-[#00f2ff] transition flex items-center">
-                    <span className="mr-2 text-[#00f2ff]">→</span>
+              {quickLinks.map((link) => (
+                <motion.li key={link.path} variants={fadeInUp}>
+                  <Link 
+                    to={link.path} 
+                    className="text-gray-400 hover:text-accentLight transition-colors flex items-center group"
+                  >
+                    <motion.span 
+                      className="mr-2 text-accent group-hover:animate-wave"
+                      whileHover={{ x: [0, 5, 0] }}
+                    >
+                      →
+                    </motion.span>
                     {link.name}
                   </Link>
                 </motion.li>
@@ -84,45 +132,37 @@ const Footer = () => {
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-xl font-semibold text-white mb-6 pb-2 border-b border-[#00f2ff] inline-block">
+          <motion.div variants={fadeInUp}>
+            <h3 className="text-lg font-semibold text-white mb-6 pb-2 border-b border-accent/30">
               Contact Us
             </h3>
-            <ul className="space-y-4 text-gray-300">
+            <ul className="space-y-4 text-gray-400">
               {contactInfo.map((info, index) => (
                 <motion.li 
                   key={index}
-                  className="flex items-start"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="flex items-start group"
+                  variants={fadeInUp}
                 >
-                  <i className={`fas fa-${info.icon} text-[#00f2ff] mr-3 mt-1`}></i>
-                  <span>{info.text}</span>
+                  <div className="glass-light w-8 h-8 flex items-center justify-center rounded-full mr-3 group-hover:bg-accent/20 transition-colors">
+                    <i className={`fas fa-${info.icon} text-accent text-sm group-hover:text-accentLight`} />
+                  </div>
+                  <span className="group-hover:text-accentLight transition-colors">{info.text}</span>
                 </motion.li>
               ))}
             </ul>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Bottom Footer */}
+        {/* Copyright */}
         <motion.div 
-          className="border-t border-gray-700 mt-16 pt-8 text-center text-gray-500 text-sm tracking-wide"
+          className="border-t border-gray-800 mt-16 pt-8 text-center text-gray-500 text-sm"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ delay: 0.4 }}
           viewport={{ once: true }}
         >
           <p>&copy; {new Date().getFullYear()} Cartly Dev. All rights reserved.</p>
-          <div className="mt-2 flex justify-center space-x-4">
-            <a href="#" className="hover:text-[#00f2ff] transition">Privacy Policy</a>
-            <span>•</span>
-            <a href="#" className="hover:text-[#00f2ff] transition">Terms of Service</a>
-          </div>
+          <p className="mt-2">Made with <span className="text-accent">❤️</span> by Cartly Team</p>
         </motion.div>
       </div>
     </footer>

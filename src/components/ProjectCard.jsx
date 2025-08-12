@@ -4,15 +4,44 @@ import { Link } from 'react-router-dom';
 const ProjectCard = ({ title, description, image, tags, link }) => {
   return (
     <motion.div 
-      className="relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-2xl shadow-xl overflow-hidden border border-[#00CFFF]/20 hover:shadow-cyan-500/30 transition-all duration-500 group"
+      className="relative glass rounded-2xl shadow-xl overflow-hidden border border-accent/20 hover:shadow-cyan-500/30 transition-all duration-500 group"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -10 }}
+      whileHover={{ 
+        y: -10,
+        boxShadow: '0 20px 25px -5px rgba(0, 207, 255, 0.1), 0 10px 10px -5px rgba(0, 207, 255, 0.04)'
+      }}
       transition={{ type: 'spring', stiffness: 300 }}
     >
       {/* Glow effect */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#00CFFF_0%,transparent_70%)] opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+      
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-accent rounded-full"
+            style={{
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              opacity: 0.3
+            }}
+            animate={{
+              y: [0, Math.random() * 20 - 10],
+              x: [0, Math.random() * 20 - 10],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              repeatType: 'reverse'
+            }}
+          />
+        ))}
+      </div>
       
       {/* Image */}
       <div className="relative h-52 overflow-hidden">
@@ -26,7 +55,7 @@ const ProjectCard = ({ title, description, image, tags, link }) => {
         />
         {/* Hover overlay */}
         <motion.div 
-          className="absolute inset-0 bg-[#00CFFF]/60 backdrop-blur-sm flex items-center justify-center"
+          className="absolute inset-0 bg-accent/60 backdrop-blur-sm flex items-center justify-center"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -35,11 +64,23 @@ const ProjectCard = ({ title, description, image, tags, link }) => {
             href={link} 
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white font-medium px-6 py-2 rounded-full border-2 border-white hover:bg-white hover:text-[#00CFFF] transition-all duration-300"
+            className="glass-light text-white font-medium px-6 py-2 rounded-full border-2 border-white/50 hover:bg-white hover:text-accent transition-all duration-300 flex items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            View Project <i className="fas fa-external-link-alt ml-2"></i>
+            View Project 
+            <motion.span
+              className="ml-2"
+              animate={{
+                x: [0, 5, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity
+              }}
+            >
+              <i className="fas fa-external-link-alt"></i>
+            </motion.span>
           </motion.a>
         </motion.div>
       </div>
@@ -47,9 +88,10 @@ const ProjectCard = ({ title, description, image, tags, link }) => {
       {/* Content */}
       <div className="p-6 text-white">
         <motion.h3 
-          className="text-2xl font-bold mb-2 group-hover:text-[#B2FFFF] transition-colors"
+          className="text-2xl font-bold mb-2 group-hover:text-accentLight transition-colors flex items-center"
           whileHover={{ x: 5 }}
         >
+          <span className="mr-2">✨</span>
           {title}
         </motion.h3>
         <p className="text-gray-300 mb-4 leading-relaxed">{description}</p>
@@ -59,7 +101,7 @@ const ProjectCard = ({ title, description, image, tags, link }) => {
           {tags.map((tag, index) => (
             <motion.span
               key={index}
-              className="bg-[#00CFFF]/10 text-[#B2FFFF] text-xs px-3 py-1 rounded-full border border-[#00E5FF]/20"
+              className="glass-light text-accentLight text-xs px-3 py-1 rounded-full border border-accent/20"
               whileHover={{ 
                 scale: 1.1,
                 backgroundColor: 'rgba(0, 207, 255, 0.2)',

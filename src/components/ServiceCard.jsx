@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ServiceCard = ({ icon, title, description, link }) => {
   return (
     <motion.div 
-      className="relative bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white p-8 rounded-2xl border border-[#00CFFF]/20 shadow-xl hover:shadow-cyan-500/20 transition-all duration-500 group"
+      className="relative glass rounded-2xl p-8 border border-accent/20 shadow-xl hover:shadow-cyan-500/20 transition-all duration-500 group overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -17,15 +17,15 @@ const ServiceCard = ({ icon, title, description, link }) => {
     >
       {/* Floating particles background */}
       <div className="absolute inset-0 overflow-hidden rounded-2xl">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute bg-[#00CFFF] rounded-full"
+            className="absolute bg-accent rounded-full"
             style={{
-              width: Math.random() * 4 + 2 + 'px',
-              height: Math.random() * 4 + 2 + 'px',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
               opacity: 0.3
             }}
             animate={{
@@ -43,15 +43,25 @@ const ServiceCard = ({ icon, title, description, link }) => {
 
       {/* Icon */}
       <motion.div 
-        className="relative w-16 h-16 bg-[#00CFFF]/10 border border-[#00CFFF]/30 text-[#00CFFF] rounded-full flex items-center justify-center mb-6 group-hover:bg-[#00CFFF] group-hover:text-white transition-all duration-300"
+        className="relative w-16 h-16 glass-light border border-accent/30 text-accent rounded-full flex items-center justify-center mb-6 group-hover:bg-accent/10 group-hover:text-accentLight transition-all duration-300"
         whileHover={{ rotate: 10, scale: 1.1 }}
       >
-        <i className={`fas fa-${icon} text-2xl`}></i>
+        <motion.i 
+          className={`fas fa-${icon} text-2xl`}
+          animate={{
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: 'mirror'
+          }}
+        ></motion.i>
       </motion.div>
 
       {/* Title */}
       <motion.h3 
-        className="relative text-2xl font-bold mb-3 tracking-wide group-hover:text-[#B2FFFF] transition-colors"
+        className="relative text-2xl font-bold mb-3 tracking-wide group-hover:text-accentLight transition-colors font-poppins"
         whileHover={{ x: 5 }}
       >
         {title}
@@ -69,7 +79,7 @@ const ServiceCard = ({ icon, title, description, link }) => {
       >
         <Link 
           to={link} 
-          className="inline-flex items-center text-[#00CFFF] font-semibold tracking-wide hover:text-[#B2FFFF] transition-all duration-300"
+          className="inline-flex items-center gradient-text font-semibold tracking-wide hover:text-accentLight transition-all duration-300"
         >
           Learn more
           <motion.i 
