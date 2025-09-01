@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SectionTitle from '../components/SectionTitle';
@@ -6,10 +6,6 @@ import ServiceCard from '../components/ServiceCard';
 import ProjectCard from '../components/ProjectCard';
 
 const Home = () => {
-  useEffect(() => {
-    document.title = 'Cartly Dev | Innovative Technology Solutions';
-  }, []);
-
   const services = [
     {
       icon: 'mobile-alt',
@@ -57,18 +53,35 @@ const Home = () => {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
-        </div>
-        
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-          <div className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] bg-[#00f2ff] rounded-full filter blur-[100px] opacity-10 animate-pulse"></div>
-          <div className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-[#ff00aa] rounded-full filter blur-[100px] opacity-10 animate-pulse delay-1000"></div>
+      {/* Hero Section with Background Video */}
+      <section className="relative h-[100svh] min-h-screen flex items-center justify-center text-white overflow-hidden">
+        {/* Background video (no controls) */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          src="https://analytica-data.com/video/Analytica.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          // poster="/hero-poster.jpg" // optional
+          // controls are intentionally omitted to hide play bar/UI
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate nofullscreen"
+        />
+
+        {/* Dark overlay to improve text contrast */}
+        <div className="absolute inset-0 bg-black/45" />
+
+        {/* Optional soft glows (kept subtle) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] bg-[#00f2ff] rounded-full blur-[100px] opacity-10 animate-pulse" />
+          <div className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-[#ff00aa] rounded-full blur-[100px] opacity-10 animate-pulse delay-1000" />
         </div>
 
-        <div className="container mx-auto px-4 z-10 text-center">
+        {/* Content (pad for fixed Navbar height) */}
+        <div className="container mx-auto px-4 z-10 text-center pt-28 md:pt-32">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -77,28 +90,28 @@ const Home = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00f2ff] via-[#00ffaa] to-[#00f2ff]">
               Innovative <span className="text-white">Technology</span> Solutions
             </h1>
-            <motion.p 
-              className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300"
+            <motion.p
+              className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               Turning ideas into reality through custom software solutions.
             </motion.p>
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <Link 
-                to="/services" 
+              <Link
+                to="/services"
                 className="px-8 py-3 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Our Services
               </Link>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="px-8 py-3 border-2 border-[#00f2ff] rounded-full font-semibold text-white hover:bg-[#00f2ff]/10 transition-all duration-300 hover:scale-105"
               >
                 Contact Us
@@ -107,8 +120,9 @@ const Home = () => {
           </motion.div>
         </div>
 
-        <motion.div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        {/* Scroll cue */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
           animate={{ y: [0, 15, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -121,9 +135,9 @@ const Home = () => {
       {/* About Section */}
       <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
         <div className="container mx-auto px-4">
-          <SectionTitle 
-            title="Who We Are" 
-            subtitle="Cartly Dev empowers innovation through strategic digital transformation." 
+          <SectionTitle
+            title="Who We Are"
+            subtitle="Cartly Dev empowers innovation through strategic digital transformation."
           />
           <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
             <motion.div
@@ -140,7 +154,7 @@ const Home = () => {
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[1, 2, 3, 4].map((item) => (
-                  <motion.div 
+                  <motion.div
                     key={item}
                     className="p-4 bg-[#1e293b]/50 rounded-lg border border-[#334155]"
                     whileHover={{ y: -5, backgroundColor: 'rgba(0, 242, 255, 0.1)' }}
@@ -153,8 +167,8 @@ const Home = () => {
                   </motion.div>
                 ))}
               </div>
-              <Link 
-                to="/about" 
+              <Link
+                to="/about"
                 className="inline-block px-6 py-3 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Learn More About Us
@@ -168,9 +182,9 @@ const Home = () => {
               className="relative"
             >
               <div className="absolute -inset-4 bg-gradient-to-r from-[#00f2ff] to-[#00ffaa] rounded-2xl opacity-20 blur-lg"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-                alt="Our Team" 
+              <img
+                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                alt="Our Team"
                 className="relative rounded-xl shadow-2xl w-full h-auto"
               />
             </motion.div>
@@ -181,9 +195,9 @@ const Home = () => {
       {/* Services Section */}
       <section className="py-20 bg-gradient-to-b from-[#1e293b] to-[#0f172a]">
         <div className="container mx-auto px-4">
-          <SectionTitle 
-            title="Our Services" 
-            subtitle="Explore our core offerings that help businesses accelerate growth." 
+          <SectionTitle
+            title="Our Services"
+            subtitle="Explore our core offerings that help businesses accelerate growth."
           />
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             {services.map((service, index) => (
@@ -194,7 +208,7 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <ServiceCard 
+                <ServiceCard
                   icon={service.icon}
                   title={service.title}
                   description={service.description}
@@ -209,11 +223,11 @@ const Home = () => {
       {/* Projects Section */}
       <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
         <div className="container mx-auto px-4">
-          <SectionTitle 
-            title="Featured Projects" 
-            subtitle="Check out some of our recent work built with passion and precision." 
+          <SectionTitle
+            title="Featured Projects"
+            subtitle="Check out some of our recent work built with passion and precision."
           />
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
+        <div className="grid md:grid-cols-3 gap-8 mt-12">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -222,7 +236,7 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <ProjectCard 
+                <ProjectCard
                   title={project.title}
                   description={project.description}
                   image={project.image}
@@ -232,15 +246,15 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
-          <motion.div 
+          <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <Link 
-              to="/projects" 
+            <Link
+              to="/projects"
               className="inline-block px-6 py-3 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               View All Projects
