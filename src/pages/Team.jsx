@@ -8,6 +8,8 @@ const Team = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
 
   useEffect(() => {
+
+
     document.title = 'Our Team | Cartly Dev';
   }, []);
 
@@ -36,8 +38,16 @@ const Team = () => {
       social: [],
     },
     {
+      name: 'Muhammad Bilal',
+      role: 'Co-Founder & WordPress Developer',
+      bio: 'Builds fast, scalable WordPress and web apps with clean UX and modern stacks.',
+      image: null,
+      skills: ['WordPress', 'Next.js', 'Node.js'],
+      social: [],
+    },
+    {
       name: 'Shahmeer Abbas Khan',
-      role: 'Co-Founder & ASO Director',
+      role: 'Managing Director & ASO Director',
       bio: 'Digital business pioneer specializing in app store optimization and strategic user acquisition.',
       image: null,
       skills: ['ASO Leadership', 'User Acquisition', 'Digital Strategy'],
@@ -65,14 +75,6 @@ const Team = () => {
       bio: 'Financial strategist and media expert driving our digital presence and fiscal growth.',
       image: null,
       skills: ['Financial Strategy', 'Media', 'Analytics'],
-      social: [],
-    },
-    {
-      name: 'Muhammad Bilal',
-      role: 'WordPress & Full-Stack Web Developer',
-      bio: 'Builds fast, scalable WordPress and web apps with clean UX and modern stacks.',
-      image: null,
-      skills: ['WordPress', 'Next.js', 'Node.js'],
       social: [],
     },
     {
