@@ -1,7 +1,45 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionTitle from '../components/SectionTitle';
 
+const CALENDLY_URL = 'https://calendly.com/your-username/30min'; // <-- REPLACE with your real Calendly link
+
 const About = () => {
+  // Load Calendly popup widget assets (JS + CSS) once
+  useEffect(() => {
+    // Add CSS (nice default styling for the popup)
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+
+    // Add JS
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+
+    document.head.appendChild(link);
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up when this page unmounts
+      try { document.head.removeChild(link); } catch {}
+      try { document.body.removeChild(script); } catch {}
+    };
+  }, []);
+
+  const openCalendly = (e) => {
+    e?.preventDefault?.();
+    // Optional: you can append params like ?hide_gdpr_banner=1
+    const url = `${CALENDLY_URL}?hide_gdpr_banner=1`;
+    // Open Calendly popup (function provided by loaded widget.js)
+    if (window.Calendly && window.Calendly.initPopupWidget) {
+      window.Calendly.initPopupWidget({ url });
+    } else {
+      // Fallback: open in a new tab if widget isn't loaded yet
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const coreValues = [
     {
       title: "Innovation",
@@ -106,7 +144,10 @@ const About = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="mt-10 flex flex-col sm:flex-row justify-center gap-4"
             >
+              {/* Get Started -> Calendly popup */}
               <motion.button 
+                onClick={openCalendly}
+                aria-label="Schedule with Calendly"
                 className="relative overflow-hidden px-8 py-3 rounded-full bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -114,6 +155,8 @@ const About = () => {
                 <span className="relative z-10">Get Started</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#00a6ff] to-[#00f2ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </motion.button>
+
+              {/* Keep Learn More same (no Calendly) */}
               <motion.button 
                 className="relative overflow-hidden px-8 py-3 rounded-full border-2 border-[#00f2ff] text-white font-semibold hover:bg-[#00f2ff]/10 transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
@@ -347,7 +390,10 @@ const About = () => {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row justify-center gap-4"
             >
+              {/* Get a Free Consultation -> Calendly popup */}
               <motion.button 
+                onClick={openCalendly}
+                aria-label="Book a free consultation on Calendly"
                 className="relative overflow-hidden px-8 py-3 rounded-full bg-white text-[#0f172a] font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -355,14 +401,17 @@ const About = () => {
                 <span className="relative z-10">Get a Free Consultation</span>
                 <span className="absolute inset-0 bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </motion.button>
-              <motion.button 
+
+              {/* Keep this as a normal link (you can point to your portfolio route if you want) */}
+              <motion.a 
+                href="#"
                 className="relative overflow-hidden px-8 py-3 rounded-full border-2 border-white text-white font-bold hover:bg-white/10 transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="relative z-10">View Our Work</span>
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>

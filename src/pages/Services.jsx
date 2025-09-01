@@ -4,10 +4,41 @@ import { Link } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import ServiceCard from '../components/ServiceCard';
 
+const CALENDLY_URL = 'https://calendly.com/your-username/30min'; // <-- REPLACE with your Calendly link
+
 const Services = () => {
   useEffect(() => {
     document.title = 'Our Services | Cartly Dev';
   }, []);
+
+  // Load Calendly popup widget (JS + CSS) once for this page
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+
+    document.head.appendChild(link);
+    document.body.appendChild(script);
+
+    return () => {
+      try { document.head.removeChild(link); } catch {}
+      try { document.body.removeChild(script); } catch {}
+    };
+  }, []);
+
+  const openCalendly = (e) => {
+    e?.preventDefault?.();
+    const url = `${CALENDLY_URL}?hide_gdpr_banner=1`;
+    if (window.Calendly && window.Calendly.initPopupWidget) {
+      window.Calendly.initPopupWidget({ url });
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   // Services (added: AI Agents & Bot Development)
   const services = [
@@ -98,12 +129,15 @@ const Services = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="mt-10"
             >
-              <Link
-                to="/contact"
+              {/* Get Started -> Calendly popup (design preserved) */}
+              <button
+                onClick={openCalendly}
+                aria-label="Schedule with Calendly"
                 className="px-8 py-3 rounded-full bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mr-4"
               >
                 Get Started
-              </Link>
+              </button>
+
               <Link
                 to="/portfolio"
                 className="px-8 py-3 rounded-full border-2 border-[#00f2ff] text-white font-semibold hover:bg-[#00f2ff]/10 transition-all duration-300 hover:scale-105"
@@ -225,12 +259,15 @@ const Services = () => {
               Contact us today to discuss how we can help you achieve your technology goals.
             </p>
             <div className="flex justify-center gap-4">
-              <Link
-                to="/contact"
+              {/* Get a Free Consultation -> Calendly popup (design preserved) */}
+              <button
+                onClick={openCalendly}
+                aria-label="Book a free consultation on Calendly"
                 className="px-8 py-3 rounded-full bg-white text-[#0f172a] font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Get a Free Consultation
-              </Link>
+              </button>
+
               <Link
                 to="/portfolio"
                 className="px-8 py-3 rounded-full border-2 border-white text-white font-bold hover:bg-white/10 transition-all duration-300 hover:scale-105"

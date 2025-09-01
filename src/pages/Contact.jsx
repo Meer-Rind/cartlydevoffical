@@ -1,11 +1,53 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import SectionTitle from '../components/SectionTitle';
 
+/** === EMAILJS CONFIG (hardcoded) === */
+const SERVICE_ID  = 'service_9xcultt';     // your EmailJS Service ID
+const TEMPLATE_ID = 'template_z98wrwp';    // your EmailJS Template ID
+const PUBLIC_KEY  = '23ecdZ6oJiaKF6AVX';   // your EmailJS Public Key
+
+/** === CALENDLY CONFIG === */
+const CALENDLY_URL = 'https://calendly.com/your-username/30min'; // <-- REPLACE with your Calendly link
+
 const Contact = () => {
+  const formRef = useRef(null);
+  const [sending, setSending] = useState(false);
+  const [notice, setNotice] = useState(null); // {type:'success'|'error', text:string}
+
   useEffect(() => {
     document.title = 'Contact Us | Cartly Dev';
   }, []);
+
+  // Load Calendly popup widget (CSS + JS) once on this page
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+
+    document.head.appendChild(link);
+    document.body.appendChild(script);
+
+    return () => {
+      try { document.head.removeChild(link); } catch {}
+      try { document.body.removeChild(script); } catch {}
+    };
+  }, []);
+
+  const openCalendly = (e) => {
+    e?.preventDefault?.();
+    const url = `${CALENDLY_URL}?hide_gdpr_banner=1`;
+    if (window.Calendly?.initPopupWidget) {
+      window.Calendly.initPopupWidget({ url });
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   const contactMethods = [
     {
@@ -23,7 +65,6 @@ const Contact = () => {
     {
       icon: 'envelope',
       title: 'Email Us',
-      // ✅ updated emails
       description: 'info@cartlydev.com\nsupport@cartlydev.com',
       color: 'from-[#00a6ff] to-[#00f2ff]',
     },
@@ -35,6 +76,25 @@ const Contact = () => {
     { icon: 'linkedin-in', name: 'LinkedIn', color: '#0077B5' },
     { icon: 'instagram',   name: 'Instagram',color: '#E1306C' },
   ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setNotice(null);
+    setSending(true);
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, {
+        publicKey: PUBLIC_KEY,
+      });
+      setNotice({ type: 'success', text: 'Thanks! Your message has been sent.' });
+      formRef.current?.reset();
+    } catch (err) {
+      console.error(err);
+      setNotice({ type: 'error', text: 'Sorry, something went wrong. Please try again.' });
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <div className="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-gray-100 min-h-screen overflow-hidden">
@@ -69,11 +129,7 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="relative py-24 sm:py-28 md:py-32 text-center overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00f2ff] via-[#00ffaa] to-[#00f2ff]">
               Let&apos;s Connect
             </h1>
@@ -110,20 +166,15 @@ const Contact = () => {
                 align="left"
               />
 
-              <form className="space-y-5 sm:space-y-6 mt-6 sm:mt-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  viewport={{ once: true }}
-                >
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 sm:space-y-6 mt-6 sm:mt-8">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} viewport={{ once: true }}>
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">
                     Full Name
                   </label>
                   <input
                     type="text"
                     id="name"
-                    name="name"
+                    name="from_name" /* <-- EmailJS variable */
                     autoComplete="name"
                     className="w-full px-4 py-3 glass-light border border-[#334155] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00f2ff] text-white placeholder-gray-400"
                     placeholder="John Doe"
@@ -131,19 +182,14 @@ const Contact = () => {
                   />
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} viewport={{ once: true }}>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">
                     Email Address
                   </label>
                   <input
                     type="email"
                     id="email"
-                    name="email"
+                    name="reply_to" /* <-- EmailJS variable */
                     autoComplete="email"
                     className="w-full px-4 py-3 glass-light border border-[#334155] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00f2ff] text-white placeholder-gray-400"
                     placeholder="john@example.com"
@@ -151,37 +197,27 @@ const Contact = () => {
                   />
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  viewport={{ once: true }}
-                >
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} viewport={{ once: true }}>
                   <label htmlFor="subject" className="block text-sm font-semibold text-gray-300 mb-2">
                     Subject
                   </label>
                   <input
                     type="text"
                     id="subject"
-                    name="subject"
+                    name="subject" /* <-- EmailJS variable */
                     className="w-full px-4 py-3 glass-light border border-[#334155] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00f2ff] text-white placeholder-gray-400"
                     placeholder="Project details or question"
                     required
                   />
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  viewport={{ once: true }}
-                >
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} viewport={{ once: true }}>
                   <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">
                     Message
                   </label>
                   <textarea
                     id="message"
-                    name="message"
+                    name="message" /* <-- EmailJS variable */
                     rows="5"
                     className="w-full px-4 py-3 glass-light border border-[#334155] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00f2ff] text-white placeholder-gray-400"
                     placeholder="Type your message here..."
@@ -189,24 +225,25 @@ const Contact = () => {
                   ></textarea>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  viewport={{ once: true }}
-                >
+                {notice && (
+                  <div
+                    className={`text-sm rounded-md px-3 py-2 ${
+                      notice.type === 'success' ? 'bg-emerald-500/15 text-emerald-300' : 'bg-rose-500/15 text-rose-300'
+                    }`}
+                  >
+                    {notice.text}
+                  </div>
+                )}
+
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} viewport={{ once: true }}>
                   <button
                     type="submit"
-                    className="relative overflow-hidden w-full px-6 py-4 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-[#0f172a] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    disabled={sending}
+                    className="relative overflow-hidden w-full px-6 py-4 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-[#0f172a] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <span className="relative z-10">Send Message</span>
+                    <span className="relative z-10">{sending ? 'Sending…' : 'Send Message'}</span>
                     <span className="absolute inset-0 bg-gradient-to-r from-[#00a6ff] to-[#00f2ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    <motion.span
-                      className="absolute top-0 left-0 w-full h-0.5 bg-white"
-                      initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    <motion.span className="absolute top-0 left-0 w-full h-0.5 bg-white" initial={{ scaleX: 0 }} whileHover={{ scaleX: 1 }} transition={{ duration: 0.3 }} />
                   </button>
                 </motion.div>
               </form>
@@ -273,9 +310,7 @@ const Contact = () => {
                             <span className="opacity-80">{method.description.split('\n')[1]}</span>
                           </div>
                         ) : (
-                          <p className="text-gray-300 whitespace-pre-line">
-                            {method.description}
-                          </p>
+                          <p className="text-gray-300 whitespace-pre-line">{method.description}</p>
                         )}
                       </div>
                     </div>
@@ -381,8 +416,11 @@ const Contact = () => {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4"
             >
+              {/* Schedule a Call -> Calendly popup (design preserved) */}
               <a
                 href="#"
+                onClick={openCalendly}
+                aria-label="Schedule a call on Calendly"
                 className="px-7 sm:px-8 py-3.5 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-[#0f172a] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
               >
                 Schedule a Call
