@@ -6,6 +6,10 @@ import ServiceCard from '../components/ServiceCard';
 import ProjectCard from '../components/ProjectCard';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = 'CartlyDev — Home';
+  }, []);
+
   const services = [
     {
       icon: 'mobile-alt',
@@ -27,27 +31,34 @@ const Home = () => {
     },
   ];
 
+  // ✅ Updated Featured Projects
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Complete e-commerce ecosystem with cart, checkout, and inventory management.',
-      image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      tags: ['React', 'Node.js', 'MongoDB'],
-      link: '#',
+      title: 'Al-Shariah App',
+      description:
+        'Islamic lifestyle app with Quran translation, recitation, and Qibla direction for daily guidance.',
+      image:
+        'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      tags: ['Kotlin', 'Jetpack Compose', 'Google Play'],
+      link: 'https://play.google.com/store/apps/details?id=com.cartlydev.alsharia.quranapp',
     },
     {
-      title: 'Fitness Tracking App',
-      description: 'Track workouts, nutrition, and fitness goals with real-time data sync.',
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      tags: ['Flutter', 'Firebase', 'Dart'],
-      link: '#',
+      title: 'AI Agentic Website',
+      description:
+        'Modern AI-powered landing page with chatbot integration, responsive design, and optimized for SEO.',
+      image:
+        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      tags: ['React.js', 'Tailwind CSS', 'Vercel'],
+      link: 'https://ai-agent-mkf5.vercel.app/',
     },
     {
-      title: 'VR Educational Game',
-      description: 'Engaging learning experiences through gamified virtual reality modules.',
-      image: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      tags: ['Unity', 'C#', 'VR'],
-      link: '#',
+      title: 'Cloknet VPN',
+      description:
+        'Secure VPN app with in-app browser, server selection, real-time network stats, and subscription management.',
+      image:
+        'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      tags: ['Kotlin', 'Jetpack Compose', 'VpnService', 'Google Play Billing'],
+      link: '#', // link coming soon
     },
   ];
 
@@ -65,28 +76,20 @@ const Home = () => {
           playsInline
           preload="auto"
           aria-hidden="true"
-          // poster="/hero-poster.jpg" // optional
-          // controls are intentionally omitted to hide play bar/UI
           disablePictureInPicture
           controlsList="nodownload noplaybackrate nofullscreen"
         />
-
-        {/* Dark overlay to improve text contrast */}
+        {/* Contrast overlay */}
         <div className="absolute inset-0 bg-black/45" />
-
-        {/* Optional soft glows (kept subtle) */}
+        {/* Subtle glows */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] bg-[#00f2ff] rounded-full blur-[100px] opacity-10 animate-pulse" />
-          <div className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-[#ff00aa] rounded-full blur-[100px] opacity-10 animate-pulse delay-1000" />
+          <div className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-[#00ffaa] rounded-full blur-[100px] opacity-10 animate-pulse delay-1000" />
         </div>
 
-        {/* Content (pad for fixed Navbar height) */}
+        {/* Content (padding for fixed navbar) */}
         <div className="container mx-auto px-4 z-10 text-center pt-28 md:pt-32">
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00f2ff] via-[#00ffaa] to-[#00f2ff]">
               Innovative <span className="text-white">Technology</span> Solutions
             </h1>
@@ -132,61 +135,117 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
-        <div className="container mx-auto px-4">
+      {/* About Section (revamped, same theme) */}
+      <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b] relative overflow-hidden">
+        {/* soft background accents */}
+        <div className="pointer-events-none absolute -top-24 right-[-10%] w-[36rem] h-[36rem] rounded-full bg-[#00f2ff]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 left-[-10%] w-[32rem] h-[32rem] rounded-full bg-[#00a6ff]/10 blur-3xl" />
+
+        <div className="container mx-auto px-4 relative z-10">
           <SectionTitle
-            title="Who We Are"
-            subtitle="Cartly Dev empowers innovation through strategic digital transformation."
+            title="About Us"
+            subtitle="Building future-ready digital products with passion, precision, and performance."
           />
-          <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
+
+          <div className="mt-12 grid lg:grid-cols-2 gap-10 items-center">
+            {/* Left: content */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
             >
-              <p className="text-lg mb-6 text-gray-300">
-                Since 2015, we've built solutions that scale, adapt, and deliver results. Our clients range from startups to enterprise-level businesses.
-              </p>
-              <p className="mb-8 text-gray-300">
-                With agile teams and proven frameworks, we prioritize user experience, business logic, and modern infrastructure.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {[1, 2, 3, 4].map((item) => (
-                  <motion.div
-                    key={item}
-                    className="p-4 bg-[#1e293b]/50 rounded-lg border border-[#334155]"
-                    whileHover={{ y: -5, backgroundColor: 'rgba(0, 242, 255, 0.1)' }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="text-[#00f2ff] text-2xl mb-2">
-                      <i className="fas fa-check-circle"></i>
+              <div className="relative p-6 md:p-8 rounded-2xl border border-[#334155] bg-[#1e293b]/50 backdrop-blur-sm">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#00f2ff] to-[#00ffaa] opacity-20 blur-lg -z-10" />
+                <h3 className="text-2xl md:text-3xl font-extrabold text-white">
+                  We turn complexity into <span className="text-[#00f2ff]">clarity</span>, and ideas into{' '}
+                  <span className="text-[#00ffaa]">impact</span>.
+                </h3>
+                <p className="mt-4 text-gray-300 leading-relaxed">
+                  At CartlyDev, we build products that solve real problems. Our team blends strategy, design,
+                  and engineering to deliver mobile apps, web platforms, and games that are reliable, scalable,
+                  and a joy to use.
+                </p>
+
+                {/* Feature bullets */}
+                <div className="mt-6 grid sm:grid-cols-2 gap-4">
+                  {[
+                    'Client-centered & outcome-driven',
+                    'Innovative & scalable architectures',
+                    'Agile, transparent delivery',
+                    'Trusted by startups & SMEs',
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 rounded-lg border border-[#334155] bg-[#0f172a]/40 p-3"
+                    >
+                      <div className="mt-0.5 w-8 h-8 rounded-full bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-[#0f172a] flex items-center justify-center shrink-0">
+                        <i className="fas fa-check text-xs" />
+                      </div>
+                      <p className="text-gray-200">{item}</p>
                     </div>
-                    <h4 className="text-white font-medium">Feature {item}</h4>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
+
+                {/* Stats */}
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {[
+                    { k: '50+', v: 'Projects' },
+                    { k: '96%', v: 'Retention' },
+                    { k: '4.9★', v: 'Avg Rating' },
+                  ].map((s, i) => (
+                    <div
+                      key={i}
+                      className="text-center rounded-xl border border-[#334155] bg-[#0f172a]/40 py-4"
+                    >
+                      <div className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#00f2ff] to-[#00a6ff]">
+                        {s.k}
+                      </div>
+                      <div className="text-gray-300 text-sm mt-1">{s.v}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                  <Link
+                    to="/about"
+                    className="px-6 py-3 rounded-full bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] font-semibold text-white shadow-lg hover:shadow-cyan-500/20 transition-all"
+                  >
+                    Discover More
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="px-6 py-3 rounded-full border-2 border-[#00f2ff] text-white font-semibold hover:bg-[#00f2ff]/10 transition-all"
+                  >
+                    Talk to Us
+                  </Link>
+                </div>
               </div>
-              <Link
-                to="/about"
-                className="inline-block px-6 py-3 bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                Learn More About Us
-              </Link>
             </motion.div>
+
+            {/* Right: media */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#00f2ff] to-[#00ffaa] rounded-2xl opacity-20 blur-lg"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-[#00f2ff] to-[#00ffaa] rounded-2xl opacity-20 blur-lg" />
               <img
-                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                alt="Our Team"
-                className="relative rounded-xl shadow-2xl w-full h-auto"
+                src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1100&q=80"
+                alt="Building together"
+                className="relative w-full rounded-xl shadow-2xl border border-[#334155]"
+                loading="lazy"
               />
+              {/* floating badge */}
+              <div className="absolute -bottom-4 left-4 md:left-8 px-4 py-3 rounded-xl bg-[#0f172a]/80 backdrop-blur border border-[#334155] shadow-lg">
+                <div className="text-sm text-gray-300">End-to-end delivery</div>
+                <div className="font-semibold text-white">
+                  Design → Dev → Launch <span className="text-[#00f2ff]">→ Scale</span>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -227,7 +286,7 @@ const Home = () => {
             title="Featured Projects"
             subtitle="Check out some of our recent work built with passion and precision."
           />
-        <div className="grid md:grid-cols-3 gap-8 mt-12">
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
