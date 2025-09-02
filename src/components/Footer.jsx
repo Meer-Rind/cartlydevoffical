@@ -23,8 +23,8 @@ const Footer = () => {
   const contactInfo = [
     {
       icon: 'map-marker-alt',
-      text: '123 Tech Street, Silicon Valley, CA 94000',
-      href: 'https://maps.google.com/?q=123+Tech+Street,+Silicon+Valley,+CA+94000',
+      text: 'California 1968 S Coast Hwy #3572 Laguana Beach, CA 92651',
+      href: 'https://maps.google.com/?q=California 1968 S Coast Hwy #3572 Laguana Beach, CA 92651',
     },
     { icon: 'phone-alt', text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
     { icon: 'envelope', text: 'info@cartlydev.com', href: 'mailto:info@cartlydev.com' },

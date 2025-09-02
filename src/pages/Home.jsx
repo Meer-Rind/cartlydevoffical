@@ -34,21 +34,21 @@ const Home = () => {
   // ✅ Updated Featured Projects
   const projects = [
     {
-      title: 'Al-Shariah App',
+      title: 'CustomerInsignt',
       description:
-        'Islamic lifestyle app with Quran translation, recitation, and Qibla direction for daily guidance.',
+        ' Tired of guessing what to build next — or drowning in customer feedback that leads nowhere? nsightFlow’s AI Strategy Coach — your new secret weapon for making data-backed, revenue-driving product decisions.',
       image:
-        'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      tags: ['Kotlin', 'Jetpack Compose', 'Google Play'],
+        'https://cdn.prod.website-files.com/67f2bf66b0db32ae875d135e/67f2c16a5e0b1d5ad07e09a5_67c97d79192a5fe336a138e5_4b39ef45-447e-48c3-b396-40403a2b03a5.png',
+      tags: ['SAAS', 'React.js', 'MVS'],
       link: 'https://play.google.com/store/apps/details?id=com.cartlydev.alsharia.quranapp',
     },
     {
-      title: 'AI Agentic Website',
+      title: 'AI Agentic / Workflows',
       description:
-        'Modern AI-powered landing page with chatbot integration, responsive design, and optimized for SEO.',
+        'aunch AI agent bots for lead gen and support, automate LinkedIn posting at scale, and convert chats with a WhatsApp chatbot—fast, secure, and built for growth.',
       image:
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      tags: ['React.js', 'Tailwind CSS', 'Vercel'],
+        'https://images.prismic.io//intuzwebsite/ZrYQ5kaF0TcGI0pP_AIAgent%26AIAgenticWorkflowsAcrossIndustries-1.png?w=2400&q=80&auto=format,compress&fm=png8',
+      tags: ['n8n', 'Automation Worlkflows', 'ML'],
       link: 'https://ai-agent-mkf5.vercel.app/',
     },
     {
@@ -56,7 +56,7 @@ const Home = () => {
       description:
         'Secure VPN app with in-app browser, server selection, real-time network stats, and subscription management.',
       image:
-        'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+        'https://media.wired.com/photos/6785d64c347617ad34890532/3:2/w_2240,c_limit/VPN-computer-laptop-security-GettyImages-1288453381-Vertigo3d-(cropped).jpg',
       tags: ['Kotlin', 'Jetpack Compose', 'VpnService', 'Google Play Billing'],
       link: '#', // link coming soon
     },
