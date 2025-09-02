@@ -353,7 +353,7 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="relative h-72 sm:h-80 md:h-96 w-full bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
-              <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=Silicon+Valley&zoom=12&size=800x400&maptype=roadmap&key=YOUR_API_KEY')] bg-cover bg-center opacity-20"></div>
+              <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=Silicon+Valley&zoom=12&size=800x400&maptype=roadmap&key=AIzaSyDNYSLL_2mJE6WC2VCouklwc2WL-HNXnok')] bg-cover bg-center opacity-20"></div>
 
               <motion.div
                 className="relative z-10 text-center p-6 sm:p-8"
@@ -366,7 +366,7 @@ const Contact = () => {
                   <i className="fas fa-map-marker-alt text-2xl sm:text-3xl text-white"></i>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-white">Our Location</h3>
-                <p className="text-gray-300 mb-5 sm:mb-6">123 Tech Street, Silicon Valley, CA 94000</p>
+                <p className="text-gray-300 mb-5 sm:mb-6">1968 S Coast Hwy #3572 Laguana Beach, CA 92651</p>
                 <a
                   href="#"
                   className="inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 glass-light border border-[#334155] rounded-lg text-white hover:text-[#00f2ff] transition-colors"
