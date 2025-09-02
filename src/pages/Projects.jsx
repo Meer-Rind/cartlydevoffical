@@ -14,7 +14,7 @@ const Projects = () => {
       description:
         'Islamic lifestyle app with Quran translation, recitation, and Qibla direction for daily guidance.',
       image:
-        'https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80',
+        '/images/Alshariah.png',
       tags: ['Kotlin', 'Jetpack Compose'],
       link: 'https://play.google.com/store/apps/details?id=com.cartlydev.alsharia.quranapp',
       category: 'Mobile',
@@ -27,7 +27,7 @@ const Projects = () => {
       description:
         'Fun balloon popping game with addictive mechanics and colorful animations.',
       image:
-        'https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=1200&q=80',
+        '/images/popit.jpeg',
       tags: ['Unity', 'C#'],
       link: '#',
       category: 'Games',
@@ -39,19 +39,20 @@ const Projects = () => {
       description:
         'Secure VPN app with in-app browser, server selection, real-time network stats, and subscription management.',
       image:
-        'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=80',
+        '/images/cloknet.png',
       tags: ['Kotlin', 'Jetpack Compose', 'VpnService', 'Google Play Billing'],
-      link: '#',
+      link: 'https://cloknet.com',                 // ✅ changed from '#' to live site
       category: 'Mobile',
       badge: 'Security',
-      extLabel: null,
+      extLabel: 'Open Site',                        // ✅ added (same style as AI Agent)
+      extIcon: 'fas fa-up-right-from-square',       // ✅ added (same style as AI Agent)
     },
     {
       title: 'AI Agentic Website',
       description:
         'Modern AI-powered landing page with chatbot integration, responsive design, and optimized for SEO.',
       image:
-        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
+        'https://images.prismic.io//intuzwebsite/ZrYQ5kaF0TcGI0pP_AIAgent%26AIAgenticWorkflowsAcrossIndustries-1.png?w=2400&q=80&auto=format,compress&fm=png8',
       tags: ['React.js', 'Tailwind CSS', 'Vercel'],
       link: 'https://ai-agent-mkf5.vercel.app/',
       category: 'Web',
