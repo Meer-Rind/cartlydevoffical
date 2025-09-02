@@ -53,7 +53,7 @@ const Contact = () => {
     {
       icon: 'map-marker-alt',
       title: 'Visit Us',
-      description: '123 Tech Street, Silicon Valley, CA 94000',
+      description: '1968 S Coast Hwy #3572 Laguana Beach, CA 92651',
       color: 'from-[#00f2ff] to-[#00a6ff]',
     },
     {
