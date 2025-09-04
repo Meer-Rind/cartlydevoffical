@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionTitle from '../components/SectionTitle';
 
-const CALENDLY_URL = 'https://calendly.com/your-username/30min'; // <-- REPLACE with your real Calendly link
+const CALENDLY_URL = 'https://calendly.com/cartlydev-info/30min'; // <-- REPLACE with your real Calendly link
 
 const About = () => {
   // Load Calendly popup widget assets (JS + CSS) once
