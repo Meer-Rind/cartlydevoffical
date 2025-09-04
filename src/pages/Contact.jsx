@@ -65,7 +65,7 @@ const Contact = () => {
     {
       icon: 'envelope',
       title: 'Email Us',
-      description: 'info@cartlydev.com\nsupport@cartlydev.com',
+      description: 'info@cartlydev.com',
       color: 'from-[#00a6ff] to-[#00f2ff]',
     },
   ];
