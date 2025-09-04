@@ -9,7 +9,7 @@ const TEMPLATE_ID = 'template_z98wrwp';    // your EmailJS Template ID
 const PUBLIC_KEY  = '23ecdZ6oJiaKF6AVX';   // your EmailJS Public Key
 
 /** === CALENDLY CONFIG === */
-const CALENDLY_URL = 'https://calendly.com/your-username/30min'; // <-- REPLACE with your Calendly link
+const CALENDLY_URL = 'https://calendly.com/cartlydev-info/30min'; // <-- REPLACE with your Calendly link
 
 const Contact = () => {
   const formRef = useRef(null);
