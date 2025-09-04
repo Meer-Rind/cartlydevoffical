@@ -14,7 +14,8 @@ const Home = () => {
     {
       icon: 'Security ',
       title: 'Cybersecurity Solutions',
-      description: 'End-to-end protection across web, mobile, and cloud with zero-trust architecture, automated scanning, penetration testing, and 24/7 incident response.',
+      description:
+        'End-to-end protection across web, mobile, and cloud with zero-trust architecture, automated scanning, penetration testing, and 24/7 incident response.',
       link: '/services/Cyber Security',
     },
     {
@@ -206,6 +207,93 @@ const Home = () => {
                   ))}
                 </div>
 
+                {/* ▶️ Cybersecurity Spotlight (single addition) */}
+                <div className="mt-7 rounded-2xl border border-[#334155] bg-[#0b1220]/60 backdrop-blur p-4 md:p-5">
+                  <div className="flex flex-col md:flex-row md:items-center gap-4">
+                    {/* Shield/Lock logo */}
+                    <div className="flex items-center justify-center shrink-0">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00f2ff] to-[#00a6ff] p-[2px]">
+                        <div className="w-full h-full rounded-[10px] bg-[#0b1220] flex items-center justify-center">
+                          {/* Inline SVG so no external assets are required */}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="w-8 h-8 text-[#00e5ff]"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                          >
+                            <path
+                              d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M9.75 11.25a2.25 2.25 0 114.5 0v1.5h-4.5v-1.5z"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path d="M12 14.5v1.25" strokeLinecap="round" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Text + badges */}
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-sm uppercase tracking-widest text-[#8be9ff]">CartlyDev Cybersecurity</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#07101b] border border-[#163044] text-[#a5f3fc]">
+                          Zero-Trust
+                        </span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#07101b] border border-[#163044] text-[#a5f3fc]">
+                          24/7 SOC
+                        </span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#07101b] border border-[#163044] text-[#a5f3fc]">
+                          Pen-Testing
+                        </span>
+                      </div>
+                      <p className="mt-2 text-gray-300 text-sm leading-relaxed">
+                        Defense-in-depth across web, mobile, and cloud. We harden apps, automate scanning, and respond to
+                        incidents in real time—so your business stays resilient.
+                      </p>
+
+                      {/* Compliance row */}
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {['ISO 27001', 'SOC 2', 'OWASP Top 10', 'GDPR'].map((badge) => (
+                          <span
+                            key={badge}
+                            className="text-[11px] tracking-wide px-2.5 py-1 rounded-full border border-[#2b3a52] bg-[#0e1728] text-[#cdeffd]"
+                          >
+                            {badge}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <div className="mt-4">
+                        <Link
+                          to="/services/Cyber Security"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#00f2ff] to-[#00a6ff] text-[#0b1220] font-semibold hover:opacity-95 transition"
+                        >
+                          Explore Cybersecurity
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                          >
+                            <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* ▶️ End Cybersecurity Spotlight */}
+
                 {/* CTAs */}
                 <div className="mt-7 flex flex-col sm:flex-row gap-3">
                   <Link
@@ -286,6 +374,8 @@ const Home = () => {
             title="Featured Projects"
             subtitle="Check out some of our recent work built with passion and precision."
           />
+        </div>
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             {projects.map((project, index) => (
               <motion.div
