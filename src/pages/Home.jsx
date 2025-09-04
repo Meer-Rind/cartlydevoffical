@@ -12,6 +12,12 @@ const Home = () => {
 
   const services = [
     {
+      icon: 'Cyber Security ',
+      title: "Cybersecurity Solutions",
+      description: 'End-to-end protection across web, mobile, and cloud with zero-trust architecture, automated scanning, penetration testing, and 24/7 incident response.'
+      link: '/services/Cyber Security',
+    },
+    {
       icon: 'mobile-alt',
       title: 'App Development',
       description: 'High-performance mobile apps for iOS & Android, built with the latest technologies.',
@@ -22,12 +28,6 @@ const Home = () => {
       title: 'Web Development',
       description: 'Responsive, fast, and secure websites tailored to your brand.',
       link: '/services/web-development',
-    },
-    {
-      icon: 'gamepad',
-      title: 'Game Development',
-      description: 'Cross-platform games with immersive experiences using cutting-edge tools.',
-      link: '/services/game-development',
     },
   ];
 
