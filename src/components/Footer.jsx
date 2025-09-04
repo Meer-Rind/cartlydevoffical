@@ -27,8 +27,7 @@ const Footer = () => {
       href: 'https://maps.google.com/?q=California 1968 S Coast Hwy #3572 Laguana Beach, CA 92651',
     },
     { icon: 'phone-alt', text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: 'envelope', text: 'info@cartlydev.com', href: 'mailto:info@cartlydev.com' },
-    { icon: 'envelope', text: 'support@cartlydev.com', href: 'mailto:support@cartlydev.com' },
+    { icon: 'envelope', text: 'info@cartlydev.com', href: 'mailto:info@cartlydev.com' }
   ];
 
   // Map friendly names to Font Awesome brand icon names
