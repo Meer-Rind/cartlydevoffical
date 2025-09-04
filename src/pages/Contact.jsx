@@ -27,7 +27,7 @@ const Contact = () => {
     link.href = 'https://assets.calendly.com/assets/external/widget.css';
 
     const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.src = 'https://calendly.com/cartlydev-info/30min';
     script.async = true;
 
     document.head.appendChild(link);
