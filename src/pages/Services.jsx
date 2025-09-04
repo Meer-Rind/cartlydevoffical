@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import ServiceCard from '../components/ServiceCard';
 
-const CALENDLY_URL = 'https://calendly.com/your-username/30min'; // <-- REPLACE with your Calendly link
+const CALENDLY_URL = 'https://calendly.com/cartlydev-info/30min'; // <-- REPLACE with your Calendly link
 
 const Services = () => {
   useEffect(() => {
