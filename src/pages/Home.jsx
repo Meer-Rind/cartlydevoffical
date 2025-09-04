@@ -12,7 +12,7 @@ const Home = () => {
 
   const services = [
     {
-      icon: 'Cyber Security ',
+      icon: 'Security ',
       title: 'Cybersecurity Solutions',
       description: 'End-to-end protection across web, mobile, and cloud with zero-trust architecture, automated scanning, penetration testing, and 24/7 incident response.',
       link: '/services/Cyber Security',
